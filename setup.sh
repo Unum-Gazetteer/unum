@@ -19,3 +19,5 @@ sudo -u postgres psql -f sql_scripts/clear.sql
 sudo -u postgres psql -f sql_scripts/initialize.sql
 sudo -u postgres psql -f sql_scripts/load_geonames.sql
 sudo -u postgres psql -f sql_scripts/load_osmnames.sql
+sudo -u postgres psql -f sql_scripts/load_geo_tags.sql
+
