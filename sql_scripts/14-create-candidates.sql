@@ -1,6 +1,5 @@
-DROP TABLE places;
-CREATE TABLE places (
-    id serial primary key,
+CREATE TABLE candidates (
+    id integer,
     admin1code varchar(100),
     admin2code varchar(101),
     admin3code varchar(102),
@@ -22,12 +21,12 @@ CREATE TABLE places (
     geonameid bigint,
     geo_tag_id bigint,
     importance decimal,
-    latitude float NOT NULL,
-    longitude float NOT NULL,
-    name varchar(2000) NOT NULL,
-    name_en varchar(2000) NOT NULL,
-    name_en_unaccented varchar(2000) NOT NULL,
-    normalized_name varchar(2000) NOT NULL, /* unaccented and lowered */
+    latitude float,
+    longitude float,
+    name varchar(2000),
+    name_en varchar(2000),
+    name_en_unaccented varchar(2000),
+    normalized_name varchar(2000), /* unaccented and lowered */
     north float,
     osmname_class varchar(1000),
     osmname_id bigint,
@@ -45,5 +44,14 @@ CREATE TABLE places (
     wikidata varchar(108),
     wikipageid bigint,
     wikititle varchar(1000),
-    wikiurl varchar(1000)
+    wikiurl varchar(1000),
+    within_1_meter boolean,
+    within_10_meters boolean,
+    within_100_meters boolean,
+    within_1000_meters boolean,
+    within_10000_meters boolean,
+    population_exists boolean,
+    population_is_close boolean,
+    has_admin_level boolean,
+    score float
 );

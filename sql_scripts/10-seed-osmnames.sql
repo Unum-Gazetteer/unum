@@ -1,5 +1,5 @@
 INSERT INTO places
-(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, importance, latitude, longitude, name, name_en, name_en_unaccented, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)
+(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, point, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)
 SELECT
     NULL AS admin1code,
     NULL AS admin2code,
@@ -27,12 +27,14 @@ SELECT
     name AS name,
     name AS name_en, /* name_en, Primary name in English ... need to find a better way of converting it.. but seems like osmanmes gives prominance to English */
     unaccent(name) AS name_en_unaccented, /* need to find a way to grab english name */
+    lower(unaccent(name)) as normalized_name,
     to_float(north) AS north,
     class as osmname_class,
     to_bigint(osm_id) AS osmname_id, /* osmname_id just use osm_id */
     type AS osmname_type,
     to_bigint(osm_id) as osm_id,
     to_integer(place_rank) AS place_rank,
+    ST_SetSRID(ST_Point(to_float(lon), to_float(lat)), 4326) AS point,
     NULL AS population,
     to_float(south) AS south,
     state,
