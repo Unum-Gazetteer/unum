@@ -1,5 +1,5 @@
 INSERT INTO places
-(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, point, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)
+(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, point, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)
 SELECT
     NULL AS admin1code,
     NULL AS admin2code,
@@ -21,6 +21,11 @@ SELECT
     NULL AS geoname_feature_code, /* geoname feature_code */
     NULL AS geonameid, /* geoname id */
     NULL AS geo_tag_id, /* geo_tag_id -- could do a look up for each but would only be for English wikipedia??  */
+    get_grid_cell(to_float(lat), to_float(lon), 1) AS grid_cell_1_degree,
+    get_grid_cell(to_float(lat), to_float(lon), 5) AS grid_cell_5_degrees,
+    get_grid_cell(to_float(lat), to_float(lon), 10) AS grid_cell_10_degrees,
+    get_admin_level(type, to_integer(place_rank)) IS NOT NULL as has_admin_level,
+    FALSE AS has_population,
     to_float(importance) as importance,
     to_float(lat) as latitude,
     to_float(lon) as longitude,
