@@ -1,36 +1,16 @@
-/*
-postgres=# select ARRAY(SELECT DISTINCT * FROM unnest(string_to_array(string_agg(alternate_names, ','), ',')) ORDER BY 1) from places WHERE normalized_name = 'portland' GROUP BY normalized_name LIMIT 3;
-*/
-CREATE OR REPLACE FUNCTION uniquify(input text)
-RETURNS text AS $$
-    SELECT array_to_string(ARRAY(SELECT DISTINCT * FROM unnest(string_to_array(input, ',')) ORDER BY 1), ',');
-$$
-LANGUAGE SQL;
-
-CREATE OR REPLACE FUNCTION
-conflate_places(place_ids_as_string text)
-RETURNS void AS $$
-BEGIN
-    RAISE NOTICE 'conflating';
-END;
-$$
-LANGUAGE PLPGSQL;
-
-/*SELECT conflate_places(place_ids) FROM matches_within_11_meters LIMIT 10;*/
-
-
 /* Conflate places that have almost exactly same lat-long and are not places */
-INSERT INTO places (asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_type, osm_id, place_rank, point, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)
-SELECT
-    asciiname varchar(2000),
-    uniquify(string_agg(alternate_names, ','))
-    uniquify(string_agg(attribution, ','))
-    city,
-    county,
-    country,
-    country_code,
+WITH conflated AS (
+ SELECT (
+  SELECT
+    get_longest(string_agg(asciiname, ',')),
+    uniquify(string_agg(alternate_names, ',')),
+    uniquify(string_agg(attribution, ',')),
+    get_longest(city),
+    get_longest(county),
+    get_longest(country),
+    get_longest(country_code),
     max(dem),
-    display_name, /* should we recompute display names or really take the longest one? */
+    get_longest(display_name), /* should we recompute instead? */
     max(elevation),
     max(east),
     geoname_feature_class, /* should I really smash into one ? */
@@ -56,7 +36,7 @@ SELECT
     osm_type, /* smash? */
     osm_id, /* should I smash? */
     max(place_rank),
-    point geometry(Point,4326), /* really should get closest to centroid */
+    point, /* really should get closest to centroid */
     max(population),
     min(south),
     state,
@@ -67,4 +47,9 @@ SELECT
     wikipageid,
     wikititle,
     wikiurl
+    FROM places WHERE id = ANY(string_to_array(place_ids, ',')::int[])
+ ) as subquery
+ FROM matches_within_11_meters
 )
+/*INSERT INTO places (asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_type, osm_id, place_rank, point, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)*/
+SELECT * FROM conflated LIMIT 1;
