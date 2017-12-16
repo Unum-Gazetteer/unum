@@ -40,6 +40,7 @@ CREATE TABLE places (
     osm_type varchar(106),
     osm_id varchar(107),
     place_rank int,
+    place_type varchar(1),
     point geometry(Point,4326),
     population bigint,
     south float,
