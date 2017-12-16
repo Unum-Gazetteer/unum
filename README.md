@@ -20,4 +20,4 @@ The license used by [OpenStreetMap](https://openstreetmap.org) is [Open Data Com
 Although [Wikipedia](https://wikipedia.org) content appears to be available under different types of licenses, [Wikidata](https://www.wikidata.org/) (data derived from Wikipedia) is dedicated to the public domain under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ### Disclaimer
-To the best of my ability, I have written this code and distributed this data in accordance with all licenses. If anyone has any questions or believe I have misinterpreted the licenses, please don't hesitate to contact me at daniel.j.dufour@gmail.com and I will address your concerns promptly.
+To the best of my ability, I have written this code and distributed this data in accordance with all licenses. If anyone has any questions or believe I have misinterpreted the licenses, please don't hesitate to contact me at daniel@firstdraftgis.com and I will address your concerns promptly.
