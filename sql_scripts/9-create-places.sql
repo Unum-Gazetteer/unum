@@ -35,7 +35,7 @@ CREATE TABLE places (
     normalized_name varchar(2000) NOT NULL, /* unaccented and lowered */
     north float,
     osmname_class varchar(1000),
-    osmname_id bigint,
+    osmname_id varchar(1000), /* can be multiple when conflated */
     osmname_type varchar(1000),
     osm_type varchar(106),
     osm_id varchar(107),
