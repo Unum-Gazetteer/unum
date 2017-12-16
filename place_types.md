@@ -19,3 +19,19 @@ This gazetter uses a simplified mapping of place types that combines feature cla
 | R                     | Transportation like roads | T |
 | S                     | Spot, building, farm | B |
 | T                     | Mountain,hill,rock,... | N |
+
+| OpenStreetMap Type | Gazetteer Place Type |
+| ------------------ | -------------------- |
+| administrative     | P |
+| hamlet | P |
+| river | N |
+| stream | N |
+| residential | P |
+| riverbank | N |
+| village | P |
+
+| OpenStreetMap Class | Gazetteer Place Type |
+| ------------------ | -------------------- |
+| highway     | T |
+| waterway | N |
+| place | P |
