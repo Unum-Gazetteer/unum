@@ -42,6 +42,7 @@ CREATE TABLE places (
     place_rank int,
     place_type varchar(1),
     point geometry(Point,4326),
+    point_4 geometry(Point,4326), /* point with precision to 4 decimal degrees. or 11 meters */
     population bigint,
     south float,
     state varchar(1000),

@@ -1,5 +1,5 @@
 INSERT INTO places
-(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, point, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)
+(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, place_type, point, point_4, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl)
 SELECT
     NULL AS admin1code,
     NULL AS admin2code,
@@ -39,7 +39,9 @@ SELECT
     type AS osmname_type,
     to_bigint(osm_id) as osm_id,
     to_integer(place_rank) AS place_rank,
+    COALESCE((SELECT place_type FROM osm_class_to_place_type WHERE osm_class = class LIMIT 1)::varchar, (SELECT place_type FROM osm_type_to_place_type WHERE osm_type = type LIMIT 1)::varchar) as place_type,
     ST_SetSRID(ST_Point(to_float(lon), to_float(lat)), 4326) AS point,
+    ST_SetSRID(ST_Point(round_to_4_decimals(lon), round_to_4_decimals(lat)), 4326) AS point_4,
     NULL AS population,
     to_float(south) AS south,
     state,
