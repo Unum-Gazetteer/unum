@@ -102,3 +102,6 @@ ENV/
 
 # swap files
 *.sw*
+
+# temporary backup files
+*.bak
