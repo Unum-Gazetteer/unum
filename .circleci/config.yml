@@ -19,7 +19,7 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m      
       - run:
           name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential postgresql sudo
+          command: apt-get update -qq && apt-get install -y build-essential postgresql postgresql-contrib sudo vim unzip
       - run:
           name: Restart PostgreSQL
           command: service postgresql restart
