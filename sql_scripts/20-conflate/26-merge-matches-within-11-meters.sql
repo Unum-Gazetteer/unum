@@ -94,5 +94,5 @@ SELECT
 FROM conflated;
 
 
-/* NEED TO CHANGE THIS TO DELETE FROM */
- SELECT * FROM places WHERE id = ANY(SELECT string_to_array(string_agg(place_ids, ','), ',')::int[] FROM matches_within_11_meters)::int[];
+/* Delete Old Records that have been merged */
+DELETE FROM places WHERE id IN (SELECT unnest(string_to_array(string_agg(place_ids, ','), ',')::int[]) FROM matches_within_11_meters);
