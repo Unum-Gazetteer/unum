@@ -1,4 +1,4 @@
-DROP FUNCTION longest_accum(text, text) CASCADE;
+/* DROP FUNCTION longest_accum(text, text) CASCADE; */
 CREATE OR REPLACE FUNCTION longest_accum(accum text, value text)
 RETURNS text AS $$
     SELECT CASE WHEN value IS NOT NULL AND char_length(value) >= char_length(accum) THEN value ELSE accum END;
@@ -15,7 +15,7 @@ CREATE AGGREGATE longest(text)
 
 
 /* first */
-DROP FUNCTION first_accum(anyelement, anyelement) CASCADE;
+/* DROP FUNCTION first_accum(anyelement, anyelement) CASCADE; */
 CREATE OR REPLACE FUNCTION first_accum(accum anyelement, value anyelement)
 RETURNS anyelement AS $$
     SELECT CASE WHEN (accum IS NULL AND value::text != '') THEN value ELSE accum END;
