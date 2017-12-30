@@ -66,6 +66,9 @@ jobs:
               fi;
       - save_cache:
           key: gazetteers
-          paths: "/tmp/gazetteers"              
+          paths: "/tmp/gazetteers"    
+      - run:
+          name: Load Gazetteers
+          command: for file in sql_scripts/5-load/*; do psql -f $file unum; done
 
           
