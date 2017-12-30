@@ -20,4 +20,4 @@ CREATE TABLE geonames (
     modification_date DATE
 );
 
-COPY geonames FROM '/tmp/allCountries.txt' WITH (DELIMITER E'\t');
+COPY geonames FROM '/tmp/gazetteers/allCountries.txt' WITH (DELIMITER E'\t');

@@ -25,4 +25,4 @@ CREATE TABLE osmnames (
     housenumbers varchar(1000000) null
 );
 
-COPY osmnames FROM '/tmp/planet-latest_geonames.tsv' WITH (FORMAT 'csv', DELIMITER E'\t');
+COPY osmnames FROM '/tmp/gazetteers/planet-latest_geonames.tsv' WITH (FORMAT 'csv', DELIMITER E'\t');

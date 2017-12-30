@@ -13,4 +13,4 @@ CREATE TABLE verbose_geo_tags (
     gt_page_title varchar(500)
 );
 
-COPY verbose_geo_tags FROM '/tmp/verbose_geo_tags.tsv' WITH (FORMAT 'csv', DELIMITER E'\t');
+COPY verbose_geo_tags FROM '/tmp/gazetteers/verbose_geo_tags.tsv' WITH (FORMAT 'csv', DELIMITER E'\t');
