@@ -24,5 +24,8 @@ jobs:
           name: Restart PostgreSQL
           command: service postgresql restart
       - run:
+          name: Copy SQL Scripts to Temp Folder
+          command: cp -fr sql_scripts /tmp/sql_scripts
+      - run:
           name: Initialize DB
-          command: sudo -u postgres psql -f sql_scripts/initialize.sql
+          command: sudo -u postgres psql -f /tmp/sql_scripts/initialize.sql
