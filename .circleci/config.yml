@@ -42,17 +42,24 @@ jobs:
           command: for file in sql_scripts/1-utils/*; do psql -f $file unum; done
       - run:
           name: Create Custom Number Conversion Functions
-          command: for file in sql_scripts/2-convert/*; do psql -f $file unum; done          
+          command: for file in sql_scripts/2-convert/*; do psql -f $file unum; done
+      - restore_cache:
+          keys:
+              - geonames
+              - osmnames
       - run:
           name: Download OSMNames
           command: |
-              wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz -O /tmp/planet-latest_geonames.tsv.gz
+              if [ ! -f "/tmp/planet-latest_geonames.tsv.gz" ] ; then wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz -O /tmp/planet-latest_geonames.tsv.gz fi;
               cd /tmp && gunzip planet-latest_geonames.tsv.gz;
       - run:
           name: Download GeoNames
           command: |
-              wget http://download.geonames.org/export/dump/allCountries.zip -O /tmp/allCountries.zip
+              if [ ! -f "/tmp/allCountries.zip" ] ; then wget http://download.geonames.org/export/dump/allCountries.zip -O /tmp/allCountries.zip fi;
               cd /tmp && unzip allCountries.zip
+      - save_cache:
+          key: geonames
+          paths: "/tmp/allCountries.zip"              
       - save_cache:
           key: osmnames
           paths: "/tmp/planet-latest_geonames.tsv.gz"
