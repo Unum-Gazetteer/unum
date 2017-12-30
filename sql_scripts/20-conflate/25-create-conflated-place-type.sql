@@ -29,6 +29,6 @@ CREATE TYPE conflated_place AS (
     population bigint,                  south float,
     state varchar(1010),                street varchar(1011),
     timezone varchar(40),               west float,
-    wikidata varchar(1008),              wikipageid bigint,
+    wikidata varchar(1008),             wikipageid bigint,
     wikititle varchar(1013),            wikiurl varchar(1012)
 );
