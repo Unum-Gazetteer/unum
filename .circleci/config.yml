@@ -6,8 +6,5 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install System Dependencies
-          command: bash install_system_dependencies.sh
-      - run:
-          name: Run SQL Files
-          command: sudo bash run_sql_files.sh
+          name: Install Binutils
+          command: sudo apt-get install binutils
