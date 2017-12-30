@@ -21,5 +21,8 @@ jobs:
           name: Install System Dependencies
           command: apt-get update -qq && apt-get install -y build-essential postgresql sudo
       - run:
+          name: Restart PostgreSQL
+          command: service postgresql restart
+      - run:
           name: Initialize DB
           command: sudo -u postgres psql -f sql_scripts/initialize.sql
