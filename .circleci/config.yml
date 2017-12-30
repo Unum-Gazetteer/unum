@@ -53,3 +53,7 @@ jobs:
           command: |
               wget http://download.geonames.org/export/dump/allCountries.zip -O /tmp/allCountries.zip
               cd /tmp && unzip allCountries.zip
+      - save_cache:
+          key: osmnames
+          paths: "/tmp/planet-latest_geonames.tsv.gz"
+          
