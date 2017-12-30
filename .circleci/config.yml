@@ -15,4 +15,4 @@ jobs:
           command: sleep 15 
       - run:
           name: Initializing Database
-          command: psql -f sql_scripts/initialize.sql
+          command: psql
