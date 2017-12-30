@@ -25,7 +25,7 @@ jobs:
           command: apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$'
       - run:
           name: Install Other System Dependencies
-          command: apt-get install -y build-essential gunzip sudo unzip vim
+          command: apt-get install -y build-essential sudo unzip vim
       - run:
           name: Restart PostgreSQL
           command: service postgresql restart
@@ -42,9 +42,30 @@ jobs:
           command: for file in sql_scripts/1-utils/*; do psql -f $file unum; done
       - run:
           name: Create Custom Number Conversion Functions
-          command: for file in sql_scripts/2-convert/*; do psql -f $file unum; done          
+          command: for file in sql_scripts/2-convert/*; do psql -f $file unum; done
+      - restore_cache:
+          keys: gazetteers
+      - run:
+          name: Create gazetteers Directory
+          command: mkdir /tmp/gazetteers
       - run:
           name: Download OSMNames
           command: |
-              wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz -O /tmp/planet-latest_geonames.tsv.gz
-              cd /tmp && gunzip planet-latest_geonames.tsv.gz;
+              if [ ! -f "/tmp/gazetteers/planet-latest_geonames.tsv" ] ; then
+                cd /tmp/gazetteers;
+                wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz;
+                gunzip planet-latest_geonames.tsv.gz;
+              fi;
+      - run:
+          name: Download GeoNames
+          command: |
+              if [ ! -f "/tmp/gazetteers/allCountries.txt" ] ; then
+                cd /tmp/gazetteers;
+                wget http://download.geonames.org/export/dump/allCountries.zip;
+                unzip allCountries.zip;
+              fi;
+      - save_cache:
+          key: gazetteers
+          paths: "/tmp/gazetteers"              
+
+          
