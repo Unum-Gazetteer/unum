@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Wait for DB
-          command: service postgresql restart      
+          command: sleep 15 
       - run:
           name: Initializing Database
           command: psql -f sql_scripts/initialize.sql
