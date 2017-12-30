@@ -9,14 +9,20 @@ jobs:
       - image: postgres:9.5
         environment:
         - POSTGRES_USER=ubuntu
-        - POSTGRES_DB=db_name
+        - POSTGRES_DB=unum
     steps:
       - checkout
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m      
       - run:
           name: Install System Dependencies
           command: apt-get update -qq && apt-get install -y build-essential postgresql
       - run:
           name: Initialize DB
           command: psql -f sql_scripts/initialize.sql
-        environment:
-          DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
