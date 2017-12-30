@@ -30,14 +30,16 @@ jobs:
           name: Restart PostgreSQL
           command: service postgresql restart
       - run:
-          name: Change to Temp Directory
-          command: cd /tmp          
+          name: Create Postgresql USER
+          command: |
+              sudo -u postgres psql -c "CREATE ROLE $(whoami) CREATEDB LOGIN SUPERUSER"
+              sudo -u postgres psql -c "CREATE DATABASE unum;"
       - run:
-          name: Copy SQL Scripts to Temp Folder
-          command: cp -fr /root/project/sql_scripts /tmp/sql_scripts
-      - run:
-          name: Initialize DB
-          command: sudo -u postgres psql -f /tmp/sql_scripts/initialize.sql
+          name: Initialize DB Extensions
+          command: psql -f sql_scripts/create_extensions.sql unum;
       - run:
           name: Create PSQL Utils
-          command: for file in /tmp/sql_scripts/1-utils/*; do sudo -u postgres psql -f $file; done  
+          command: for file in sql_scripts/1-utils/*; do psql -f $file unum; done
+      - run:
+          name: Create Custom Number Conversion Functions
+          command: for file in sql_scripts/2-convert/*; do psql -f $file unum; done          
