@@ -6,6 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install UbuntuGIS
+          command: add-apt-repository -y ppa:ubuntugis
+      - run:
           name: Install GDAL
           command: apt install -y gdal-bin
       - run:
