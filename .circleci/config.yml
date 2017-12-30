@@ -29,3 +29,6 @@ jobs:
       - run:
           name: Initialize DB
           command: sudo -u postgres psql -f /tmp/sql_scripts/initialize.sql
+      - run:
+          name: Create PSQL Utils
+          command: for file in /tmp/sql_scripts/1-utils/*; do sudo -u postgres psql -f $file; done  
