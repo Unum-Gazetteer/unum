@@ -52,15 +52,17 @@ jobs:
           name: Download OSMNames
           command: |
               if [ ! -f "/tmp/gazetteers/planet-latest_geonames.tsv" ] ; then
-                wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz -O /tmp/planet-latest_geonames.tsv.gz;
-                cd /tmp && gunzip -- keep planet-latest_geonames.tsv.gz;
+                cd /tmp/gazetteers;
+                wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz;
+                gunzip planet-latest_geonames.tsv.gz;
               fi;
       - run:
           name: Download GeoNames
           command: |
-              if [ ! -f "/tmp/allCountries.zip" ] ; then
-                wget http://download.geonames.org/export/dump/allCountries.zip -O /tmp/allCountries.zip; 
-                cd /tmp && unzip allCountries.zip;
+              if [ ! -f "/tmp/gazetteers/allCountries.txt" ] ; then
+                cd /tmp/gazetteers;
+                wget http://download.geonames.org/export/dump/allCountries.zip;
+                unzip allCountries.zip;
               fi;
       - save_cache:
           key: gazetteers
