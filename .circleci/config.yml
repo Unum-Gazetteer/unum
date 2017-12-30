@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Install System Dependencies
-          command: sudo bash install_system_dependencies.sh
+          command: bash install_system_dependencies.sh
       - run:
           name: Run SQL Files
           command: sudo bash run_sql_files.sh
