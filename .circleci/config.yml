@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m      
+          command: sudo service postgresql restart      
       - run:
           name: Initializing Database
           command: sudo psql -f sql_scripts/initialize.sql
