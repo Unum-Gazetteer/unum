@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Wait for DB
-          command: sudo service postgresql restart      
+          command: service postgresql restart      
       - run:
           name: Initializing Database
-          command: sudo psql -f sql_scripts/initialize.sql
+          command: psql -f sql_scripts/initialize.sql
