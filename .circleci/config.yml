@@ -2,9 +2,44 @@ version: 2
 jobs:
   build:
     docker:
-      - image: mdillon/postgis
+      - image: python:latest
+        environment:
+        - PG_HOST=localhost
+        - PG_USER=ubuntu
+      - image: circleci/postgres:9.5-alpine-postgis
     steps:
       - checkout
       - run:
-          name: Initializing Database
-          command: sudo psql -f sql_scripts/initialize.sql
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Update Package Lists
+          command: apt-get update -qq
+      - run:
+          name: Install Database Dependencies
+          command: apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$'
+      - run:
+          name: Install Other System Dependencies
+          command: apt-get install -y build-essential sudo unzip vim
+      - run:
+          name: Restart PostgreSQL
+          command: service postgresql restart
+      - run:
+          name: Create Postgresql USER
+          command: |
+              sudo -u postgres psql -c "CREATE ROLE $(whoami) CREATEDB LOGIN SUPERUSER"
+              sudo -u postgres psql -c "CREATE DATABASE unum;"
+      - run:
+          name: Initialize DB Extensions
+          command: psql -f sql_scripts/create_extensions.sql unum;
+      - run:
+          name: Create PSQL Utils
+          command: for file in sql_scripts/1-utils/*; do psql -f $file unum; done
+      - run:
+          name: Create Custom Number Conversion Functions
+          command: for file in sql_scripts/2-convert/*; do psql -f $file unum; done          
