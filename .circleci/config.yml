@@ -44,23 +44,26 @@ jobs:
           name: Create Custom Number Conversion Functions
           command: for file in sql_scripts/2-convert/*; do psql -f $file unum; done
       - restore_cache:
-          keys:
-              - geonames
-              - osmnames
+          keys: gazetteers
+      - run::
+          name: Create gazetteers Directory
+          command: mkdir /tmp/gazetteers
       - run:
           name: Download OSMNames
           command: |
-              if [ ! -f "/tmp/planet-latest_geonames.tsv.gz" ] ; then wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz -O /tmp/planet-latest_geonames.tsv.gz; fi;
-              cd /tmp && gunzip -- keep planet-latest_geonames.tsv.gz;
+              if [ ! -f "/tmp/gazetteers/planet-latest_geonames.tsv" ] ; then
+                wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz -O /tmp/planet-latest_geonames.tsv.gz;
+                cd /tmp && gunzip -- keep planet-latest_geonames.tsv.gz;
+              fi;
       - run:
           name: Download GeoNames
           command: |
-              if [ ! -f "/tmp/allCountries.zip" ] ; then wget http://download.geonames.org/export/dump/allCountries.zip -O /tmp/allCountries.zip; fi;
-              cd /tmp && unzip allCountries.zip
+              if [ ! -f "/tmp/allCountries.zip" ] ; then
+                wget http://download.geonames.org/export/dump/allCountries.zip -O /tmp/allCountries.zip; 
+                cd /tmp && unzip allCountries.zip;
+              fi;
       - save_cache:
-          key: geonames
-          paths: "/tmp/allCountries.zip"              
-      - save_cache:
-          key: osmnames
-          paths: "/tmp/planet-latest_geonames.tsv.gz"
+          key: gazetteers
+          paths: "/tmp/gazetteers"              
+
           
