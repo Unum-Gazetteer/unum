@@ -9,6 +9,7 @@ jobs:
         - POSTGRES_PASSWORD=""
     steps:
       - checkout
+      - run: ls
       - run:
           name: Wait for DB
           command: sleep 15 
