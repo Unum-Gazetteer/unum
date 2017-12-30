@@ -51,7 +51,7 @@ jobs:
           name: Download OSMNames
           command: |
               if [ ! -f "/tmp/planet-latest_geonames.tsv.gz" ] ; then wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz -O /tmp/planet-latest_geonames.tsv.gz; fi;
-              cd /tmp && gunzip planet-latest_geonames.tsv.gz;
+              cd /tmp && gunzip -- keep planet-latest_geonames.tsv.gz;
       - run:
           name: Download GeoNames
           command: |
