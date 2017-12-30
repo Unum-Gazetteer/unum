@@ -7,9 +7,6 @@ jobs:
         - PG_HOST=localhost
         - PG_USER=ubuntu
       - image: circleci/postgres:9.5-alpine-postgis
-        environment:
-        - POSTGRES_USER=ubuntu
-        - POSTGRES_DB=unum
     steps:
       - checkout
       - run:
@@ -22,7 +19,7 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m      
       - run:
           name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential postgresql
+          command: apt-get update -qq && apt-get install -y build-essential postgresql sudo
       - run:
           name: Initialize DB
-          command: su postgres -c "psql -f sql_scripts/initialize.sql"
+          command: sudo -u postgres psql -f sql_scripts/initialize.sql
