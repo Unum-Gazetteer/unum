@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ruby:2.3.1
+      - image: python:latest
         environment:
         - PG_HOST=localhost
         - PG_USER=ubuntu
@@ -16,16 +16,25 @@ jobs:
             DOCKERIZE_VERSION: v0.3.0
       - run:
           name: Wait for db
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m      
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Update Package Lists
+          command: apt-get update -qq
+      - run:
+          name: Install Database Dependencies
+          command: apt-get install postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$'
       - run:
           name: Install System Dependencies
-          command: apt-get update -qq && apt-get install -y build-essential postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$' sudo unzip vim
+          command: apt-get install -y build-essential sudo unzip vim
       - run:
           name: Restart PostgreSQL
           command: service postgresql restart
       - run:
+          name: Change to Temp Directory
+          command: cd /tmp          
+      - run:
           name: Copy SQL Scripts to Temp Folder
-          command: cp -fr sql_scripts /tmp/sql_scripts
+          command: cp -fr /root/project/sql_scripts /tmp/sql_scripts
       - run:
           name: Initialize DB
           command: sudo -u postgres psql -f /tmp/sql_scripts/initialize.sql
