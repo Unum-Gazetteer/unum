@@ -10,4 +10,4 @@ jobs:
           command: echo "Installing Deps"
       - run:
           name: Initializing Database
-          command: bash sql_scripts/initialize.sql
+          command: psql -f sql_scripts/initialize.sql
