@@ -7,4 +7,4 @@ jobs:
       - checkout
       - run:
           name: Initializing Database
-          command: psql -U postgres -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -f sql_scripts/initialize.sql
+          command: sudo psql -f sql_scripts/initialize.sql
