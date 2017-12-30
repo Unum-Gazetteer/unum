@@ -5,7 +5,7 @@ RETURNS text AS $$
 $$
 LANGUAGE SQL;
 
-DROP AGGREGATE longest(text);
+/* DROP AGGREGATE longest(text); */
 CREATE AGGREGATE longest(text)
 (
     sfunc = longest_accum,
@@ -22,7 +22,7 @@ RETURNS anyelement AS $$
 $$
 LANGUAGE SQL;
 
-DROP AGGREGATE first(anyelement);
+/* DROP AGGREGATE first(anyelement); */
 CREATE AGGREGATE first(anyelement)
 (
     sfunc = first_accum,
