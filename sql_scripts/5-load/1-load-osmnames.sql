@@ -15,7 +15,7 @@ CREATE TABLE osmnames (
     state varchar(500),
     country varchar(500),
     country_code varchar(500),
-    display_name varchar(400),
+    display_name varchar(1400),
     west varchar(100),
     south varchar(100), 
     east varchar(100),
