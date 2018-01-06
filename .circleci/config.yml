@@ -47,7 +47,7 @@ jobs:
           keys: gazetteers
       - run:
           name: Create gazetteers Directory
-          command: mkdir /tmp/gazetteers
+          command: if [ ! -d "/tmp/gazetteers" ] ; then mkdir /tmp/gazetteers; fi;
       - run:
           name: Download OSMNames
           command: |
