@@ -49,6 +49,13 @@ jobs:
           name: Create gazetteers Directory
           command: if [ ! -d "/tmp/gazetteers" ] ; then mkdir /tmp/gazetteers; fi;
       - run:
+          name: Download Gazetteer from Wikidata
+          command: |
+              if [ ! -f "/tmp/gazetteers/wikidata-gazetteer.csv" ] ; then
+                cd /tmp/gazetteers;
+                wget https://s3.amazonaws.com/firstdraftgis/wikidata-gazetteer.csv;
+              fi;
+      - run:
           name: Download OSMNames
           command: |
               if [ ! -f "/tmp/gazetteers/planet-latest_geonames.tsv" ] ; then
