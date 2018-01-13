@@ -39,17 +39,18 @@ SELECT
     NULL AS osmname_type,
     to_bigint(osm_id) as osm_id,
     NULL AS place_rank,
+    /* need to first unmatch array and get first match in table .... */
     COALESCE((SELECT place_type FROM osm_class_to_place_type WHERE osm_class = class LIMIT 1)::varchar, (SELECT place_type FROM osm_type_to_place_type WHERE osm_type = type LIMIT 1)::varchar) as place_type,
-    ST_SetSRID(ST_Point(to_float(lon), to_float(lat)), 4326) AS point,
-    ST_SetSRID(ST_Point(round_to_4_decimals(lon), round_to_4_decimals(lat)), 4326) AS point_4,
-    NULL AS population,
-    to_float(south) AS south,
-    state,
-    street,
+    ST_SetSRID(ST_Point(longitude, latitude), 4326) AS point,
+    ST_SetSRID(ST_Point(round_to_4_decimals(longitude), round_to_4_decimals(latitude)), 4326) AS point_4,
+    population,
+    NULL AS south,
+    NULL AS state,
+    NULL AS street,
     NULL AS timezone, /* should probably create a function get_timezone that takes in lat lon and returns tz */
-    to_float(west) as west,
-    wikidata,
+    NULL AS as west,
+    NULL AS wikidata,
     NULL AS wikipageid,
-    substring(wikipedia from position(':' in wikipedia) + 1) AS wikititle,
-    wikipedia AS wikiurl
+    NULL AS wikititle,
+    NULL AS wikiurl
 FROM osmnames;
