@@ -1,4 +1,4 @@
-DROP TABLE places;
+DROP TABLE IF EXISTS places;
 CREATE TABLE places (
     id serial primary key,
     admin1code varchar(100),
