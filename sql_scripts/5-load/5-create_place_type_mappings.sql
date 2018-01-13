@@ -31,3 +31,15 @@ CREATE TABLE osm_type_to_place_type (
 COPY osm_type_to_place_type FROM '/tmp/osm_type_to_place_type.csv' WITH (DELIMITER ',');
 
 
+
+
+DROP TABLE IF EXISTS wikidata_instance_of_to_place_type;
+
+CREATE TABLE wikidata_instance_of_to_place_type (
+    instance_of varchar(100),
+    place_type varchar(1)
+);
+
+COPY wikidata_instance_of_to_place_type FROM '/tmp/wikidata_instance_of_to_place_type.csv' WITH (DELIMITER ',');
+
+
