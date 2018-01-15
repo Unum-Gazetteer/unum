@@ -7,7 +7,7 @@ CREATE TABLE places (
     admin4code varchar(103),
     admin_level int,
     asciiname varchar(2000),
-    alternate_names varchar(10000),
+    alternate_names varchar(20000),
     attribution varchar(1000),
     city varchar(1000),
     county varchar(1000),
@@ -52,5 +52,6 @@ CREATE TABLE places (
     wikidata varchar(108),
     wikipageid bigint,
     wikititle varchar(1000),
-    wikiurl varchar(1000)
+    wikiurl varchar(1000),
+    enwiki_title varchar(1000)    
 );
