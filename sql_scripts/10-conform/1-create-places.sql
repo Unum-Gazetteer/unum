@@ -5,7 +5,7 @@ CREATE TABLE places (
     admin2code varchar(101),
     admin3code varchar(102),
     admin4code varchar(103),
-    admin_level int,
+    admin_level smallint,
     asciiname varchar(2000),
     alternate_names varchar(20000),
     attribution varchar(1000),
