@@ -80,8 +80,19 @@ jobs:
       - run:
           name: Load Gazetteers
           command: for file in sql_scripts/5-load/*; do psql -f $file unum; done
+          timeout: 1200
       - run:
           name: Re-format Data from Gazetteers into Standard Format
           command: for file in sql_scripts/10-conform/*; do psql -f $file unum; done
+          timeout: 1200
+      - run:
+          name: Conflate
+          command: for file in sql_scripts/20-conflate/*; do psql -f $file unum; done
+      - run:
+          name: Export
+          command: for file in sql_scripts/30-export/*; do psql -f $file unum; done
+
+
+
 
           

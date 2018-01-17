@@ -3,6 +3,11 @@
 # gazetteer
 gazetteer
 
+# Data License
+The unum gazetteer is licensed under ODbL (the same as OSM). More discussion of the license is below.
+
+# Columns
+
 ## Attribution
 This gazetteer would not be possible without OpenStreetMap contributors, GeoNames, and Wikidata.  My heartfelt thanks to all.  Attribution is also provided for each place in 'attribution' column of the .tsv file. 
 
