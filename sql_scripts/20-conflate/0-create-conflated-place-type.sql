@@ -1,6 +1,5 @@
 /* Notes:
  * Doesn't include id field bc it wouldn't make sense here
- *
  */
 
 DROP TYPE conflated_place;
@@ -30,5 +29,6 @@ CREATE TYPE conflated_place AS (
     state varchar(1010),                street varchar(1011),
     timezone varchar(40),               west float,
     wikidata varchar(1008),             wikipageid bigint,
-    wikititle varchar(1013),            wikiurl varchar(1012)
+    wikititle varchar(1013),            wikiurl varchar(1012),
+    enwiki_title varchar(1023)
 );

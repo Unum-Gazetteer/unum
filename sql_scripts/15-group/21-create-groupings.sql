@@ -1,27 +1,3 @@
-/*
-    This will group places by whether they share the same OSM ID.  One example is grouping Hawaii, the admin unit, with Hawaii the islands.
-    There might be some coplications here with places like city and county that share the same location.  Should we make an exception for admin_levels?
-    
-    If not admin, group by whatevs
-    
-    Don't want to group if place type is admin and admin_level is different
-    
-    
-*/
-DROP TABLE IF EXISTS same_osm_id;
-CREATE TABLE same_osm_id (
-    id serial primary key,
-    place_ids varchar(10000),
-    osm_id varchar(107),
-    admin_level smallint,
-    instance_count int
-);
-INSERT INTO same_osm_id (place_ids, osm_id, admin_level, instance_count)
-SELECT array_to_string(array_agg(id), ','), osm_id, admin_level, count(*)
-FROM places WHERE osm_id IS NOT NULL AND osm_id != '' GROUP BY osm_id, admin_level;
-DELETE FROM same_osm_id WHERE instance_count = 1;
-
-
 /* https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude/8674#8674 */
 DROP TABLE matches_within_11_meters;
 CREATE TABLE matches_within_11_meters (

@@ -53,5 +53,5 @@ CREATE TABLE places (
     wikipageid bigint,
     wikititle varchar(1000),
     wikiurl varchar(1000),
-    enwiki_title varchar(1000)    
+    enwiki_title varchar(1023)    
 );
