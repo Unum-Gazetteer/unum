@@ -14,7 +14,7 @@ CREATE TABLE places (
     country varchar(1000),
     country_code varchar(2),
     dem varchar(1000),
-    display_name varchar(504),
+    display_name varchar(12345),
     elevation varchar(105),
     east float,
     geoname_feature_class varchar(1000),
