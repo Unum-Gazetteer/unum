@@ -27,17 +27,17 @@ RETURNS void AS $$
     NULL, /* admin_level */
     longest(asciiname), /* asciiname */
     uniq(alternate_names), /* alternate_names */
-    uniq(attribution), /* attribution */
-    longest(city), /* city */
-    longest(county), /* county */
-    longest(country), /* country */
+    uniq(attribution)::varchar(998), /* attribution */
+    longest(city)::varchar(997), /* city */
+    longest(county)::varchar(996), /* county */
+    longest(country)::varchar(995), /* country */
     longest(country_code), /* country_code */
-    max(dem), /* dem */
+    max(dem)::varchar(994), /* dem */
     longest(display_name), /* should we recompute instead? */
     max(elevation), /* elevation */
     max(east), /* east */
-    most_popular(geoname_feature_class), /* combine? */
-    most_popular(geoname_feature_code), /* combine? */
+    most_popular(geoname_feature_class)::varchar(993), /* combine? */
+    most_popular(geoname_feature_code)::varchar(992), /* combine? */
     first(geonameid), /* combine? */
     first(geo_tag_id), /* combine? */
     most_popular(grid_cell_1_degree), /* recompute? */
@@ -53,9 +53,9 @@ RETURNS void AS $$
     longest(name_en_unaccented), /* recalculate? */
     longest(normalized_name), /* recalculate? */
     max(north),
-    most_popular(osmname_class), /* ?? */
-    uniq(osmname_id), /* smash? */
-    most_popular(osmname_type),
+    most_popular(osmname_class)::varchar(991), /* ?? */
+    uniq(osmname_id)::varchar(990), /* smash? */
+    most_popular(osmname_type)::varchar(989),
     most_popular(osm_type),
     first(osm_id),
     max(place_rank),
@@ -64,14 +64,14 @@ RETURNS void AS $$
     most_popular(point_4),
     max(population),
     min(south),
-    most_popular(state),
-    most_popular(street),
+    most_popular(state)::varchar(988),
+    most_popular(street)::varchar(987),
     most_popular(timezone),
     min(west),
     uniq(wikidata),
     first(wikipageid),
-    uniq(wikititle),
-    uniq(wikiurl),
+    uniq(wikititle)::varchar(986),
+    uniq(wikiurl)::varchar(985),
     first(enwiki_title)
 
     FROM places WHERE id = ANY(string_to_array(place_ids, ',')::int[])
