@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS wikidata;
 
 CREATE TABLE wikidata (
+    wikidata_id varchar(200),
     primary_name varchar(1000),
     enwiki_title varchar(1001),
     other_names varchar(20000),
