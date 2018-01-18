@@ -51,9 +51,9 @@ jobs:
       - run:
           name: Download Gazetteer from Wikidata
           command: |
-              if [ ! -f "/tmp/gazetteers/wikidata-gazetteer.csv" ] ; then
+              if [ ! -f "/tmp/gazetteers/wikidata-gazetteer.tsv" ] ; then
                 cd /tmp/gazetteers;
-                wget https://s3.amazonaws.com/firstdraftgis/wikidata-gazetteer.csv;
+                wget https://s3.amazonaws.com/firstdraftgis/wikidata-gazetteer.tsv;
               fi;
       - run:
           name: Download OSMNames
