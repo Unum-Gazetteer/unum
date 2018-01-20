@@ -22,7 +22,7 @@ GROUP BY normalized_name, place_type, point_4;
 DELETE FROM matches_within_11_meters WHERE instance_count = 1;
 
 
-SELECT conflate_places_by_ids(place_ids) FROM matches_within_11_meters;
+SELECT count(conflate_places_by_ids(place_ids)) FROM matches_within_11_meters;
 
 
 DELETE FROM places WHERE id=ANY(ARRAY(SELECT string_to_array(string_agg(place_ids, ','), ',')::int[] FROM matches_within_11_meters LIMIT 1));

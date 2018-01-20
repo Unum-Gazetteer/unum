@@ -20,7 +20,7 @@ GROUP BY osm_id, admin_level;
 DELETE FROM same_osm_id WHERE instance_count = 1;
 
 
-SELECT conflate_places_by_ids(place_ids) FROM same_osm_id;
+SELECT count(conflate_places_by_ids(place_ids)) FROM same_osm_id;
 
 
 DELETE FROM places WHERE id=ANY(ARRAY(SELECT string_to_array(string_agg(place_ids, ','), ',')::int[] FROM same_osm_id LIMIT 1));
