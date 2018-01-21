@@ -25,4 +25,4 @@ DELETE FROM matches_within_11_meters WHERE instance_count = 1;
 SELECT count(conflate_places_by_ids(place_ids)) FROM matches_within_11_meters;
 
 
-DELETE FROM places WHERE id=ANY(ARRAY(SELECT string_to_array(string_agg(place_ids, ','), ',')::int[] FROM matches_within_11_meters LIMIT 1));
+DELETE FROM places WHERE id=ANY(SELECT string_to_array(string_agg(place_ids, ','), ',')::int[] FROM matches_within_11_meters LIMIT 1);
