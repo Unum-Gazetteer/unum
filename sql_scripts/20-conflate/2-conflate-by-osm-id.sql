@@ -23,4 +23,6 @@ DELETE FROM same_osm_id WHERE instance_count = 1;
 SELECT count(conflate_places_by_ids(place_ids)) FROM same_osm_id;
 
 
-DELETE FROM places WHERE id=ANY(SELECT string_to_array(string_agg(place_ids, ','), ',')::int[] FROM same_osm_id LIMIT 1);
+DELETE
+FROM places
+WHERE id IN (SELECT unnest(string_to_array(string_agg(place_ids, ','), ',')::bigint[]) FROM same_osm_id);

@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS places;
 CREATE TABLE places (
-    id serial primary key,
+    id bigserial primary key,
     admin1code varchar(100),
     admin2code varchar(101),
     admin3code varchar(102),
