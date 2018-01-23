@@ -49,9 +49,9 @@ CREATE TABLE places (
     street varchar(1000),
     timezone varchar(40),
     west float,
-    wikidata varchar(108),
+    wikidata varchar(10008),
     wikipageid bigint,
-    wikititle varchar(1000),
-    wikiurl varchar(1000),
-    enwiki_title varchar(1023)    
+    wikititle varchar(10000),
+    wikiurl varchar(10000),
+    enwiki_title varchar(5023)    
 );

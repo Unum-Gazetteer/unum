@@ -93,8 +93,11 @@ jobs:
           name: Export
           command: for file in sql_scripts/30-export/*; do psql -f $file unum; done
       - run:
+          name: Zip
+          command: cd /tmp && zip -r unum.tsv.zip unum.tsv
+      - run:
           name: Install AWS CLI
           command: pip install awscli --upgrade
       - run:
           name: copy into s3 bucket
-          command: aws s3 cp /tmp/unum.tsv s3://firstdraftgis/unum.tsv
+          command: aws s3 cp /tmp/unum.tsv.zip s3://firstdraftgis/unum.tsv.zip
