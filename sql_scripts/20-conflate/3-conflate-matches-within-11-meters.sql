@@ -1,5 +1,5 @@
 /* https://gis.stackexchange.com/questions/8650/measuring-accuracy-of-latitude-and-longitude/8674#8674 */
-DROP TABLE matches_within_11_meters;
+DROP TABLE IF EXISTS matches_within_11_meters;
 
 
 CREATE TABLE matches_within_11_meters (

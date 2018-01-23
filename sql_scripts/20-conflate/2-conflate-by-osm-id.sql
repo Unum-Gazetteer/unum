@@ -20,9 +20,21 @@ GROUP BY osm_id, admin_level;
 DELETE FROM same_osm_id WHERE instance_count = 1;
 
 
+SELECT count(*) from same_osm_id; 
+
+
+SELECT count(*) AS num_places from places;
+
+
 SELECT count(conflate_places_by_ids(place_ids)) FROM same_osm_id;
+
+
+SELECT count(*) AS num_places from places;
 
 
 DELETE
 FROM places
 WHERE id IN (SELECT unnest(string_to_array(string_agg(place_ids, ','), ',')::bigint[]) FROM same_osm_id);
+
+
+SELECT count(*) AS num_places from places;

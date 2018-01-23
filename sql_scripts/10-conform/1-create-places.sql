@@ -7,7 +7,7 @@ CREATE TABLE places (
     admin4code varchar(103),
     admin_level smallint,
     asciiname varchar(2000),
-    alternate_names varchar(20000),
+    alternate_names varchar(100000),
     attribution varchar(1000),
     city varchar(1000),
     county varchar(1000),

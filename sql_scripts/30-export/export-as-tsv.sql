@@ -1,6 +1,3 @@
-COPY places TO '/tmp/unum.tsv' DELIMITER E'\t' CSV HEADER;
-
-
 COPY (
     SELECT
     id,
