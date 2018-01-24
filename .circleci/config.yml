@@ -94,7 +94,8 @@ jobs:
           command: for file in sql_scripts/30-export/*; do psql -f $file unum; done
       - run:
           name: Test
-          command: python3 test.py          
+          command: python3 test.py
+          no_output_timeout: 1h
       - run:
           name: Zip
           command: cd /tmp && zip -r unum.tsv.zip unum.tsv
