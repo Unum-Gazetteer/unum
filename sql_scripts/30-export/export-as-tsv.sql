@@ -1,6 +1,5 @@
 COPY (
     SELECT
-    id,
     admin1code
     admin2code,
     admin3code,
@@ -20,7 +19,6 @@ COPY (
     geoname_feature_class,
     geoname_feature_code,
     geonameid,
-    geo_tag_id,
     importance,
     latitude,
     longitude,
@@ -28,20 +26,17 @@ COPY (
     name_en,
     north,
     osmname_class,
-    osmname_id,
     osmname_type,
     osm_type,
     osm_id,
     place_rank,
     place_type,
-    point,
     population,
     south,
     state,
     street,
     timezone,
     west,
-    wikidata,
     enwiki_title
     FROM places
 )
