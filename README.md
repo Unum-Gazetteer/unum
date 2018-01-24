@@ -1,12 +1,55 @@
-# Note: under active development.  Still in Alpha, Not ready for production.
+### Beta Version
 
-# gazetteer
-gazetteer
+# unum gazetteer
+gazetteer that combines OSMNames, GeoNames and Wikidata.
+
+# Download Link
+https://s3.amazonaws.com/firstdraftgis/unum.tsv.zip
 
 # Data License
 The unum gazetteer is licensed under ODbL (the same as OSM). More discussion of the license is below.
 
-# Columns
+# Columns (ordered alphabetically)
+| column | description |
+| -----  | ----------- |
+| admin1code | Admin 1 Code (i.e. province or U.S. State) |
+| admin2code | Admin 2 Code (i.e. district or California county) |
+| admin3code | Admin 3 Code |
+| admin4code | Admin 4 Code |
+| admin_level | Admin Level |
+| asciiname | Name converted into ascii encoding |
+| alternate_names | Other names for this place |
+| attribution | Attribution to Geonames, OSM Contributors, and/or Wikidata |
+| city | Name of City |
+| county | Name of County |
+| country | Name of Country |
+| country_code | 2-3 Letter Country Code |
+| dem | Digital Elevation Model from mostly GeoNames |
+| display_name | Display Name from mostly OSMNames |
+| elevation | Elevation from mostly GeoNames |
+| east | Max Longitude |
+| geoname_feature_class | GeoNames' Feature Class |
+| geoname_feature_code | GeoNames' Feature Code |
+| geonameid | GeoName ID |
+| importance | OSMNames' Importance |
+| latitude | Degrees North/South |
+| longitude | Degrees East/West |
+| name | Primary Name |
+| name_en | Primary Name in English |
+| north | Max Latitude  |
+| osmname_class | OSMNames' Class |
+| osmname_type | OSMNames' Type |
+| osm_type | OSMNames' osm_type |
+| osm_id | OSM ID |
+| place_rank | OSMNames' Place Rank |
+| place_type | Unum Place Type |
+| population | Population from GeoNames and Wikidata |
+| south | Min Latitude |
+| state | State, mostly from OSMNames |
+| street | Street, mostly from OSMNames |
+| timezone | Timezone, mostly from GeoNames |
+| west | Min Longitude |
+| enwiki_title | Title of English Wikipedia Page |
 
 ## Attribution
 This gazetteer would not be possible without OpenStreetMap contributors, GeoNames, and Wikidata.  My heartfelt thanks to all.  Attribution is also provided for each place in 'attribution' column of the .tsv file. 
