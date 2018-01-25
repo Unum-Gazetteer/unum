@@ -1,40 +1,35 @@
-from config import *
+from config import path_to_output
+from config import path_to_sample
 from datetime import datetime
 import csv
+from pandas import read_csv
+from random import sample
+from subprocess import check_output
 import unittest
 
+def get_row_count(path):
+    return int(check_output(["wc", "-l", path]).split(b" ")[0])
 
-threshold = 10000000000000
 
 class TestDataMethods(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
-        with open(path_to_output) as f:
-            cls.row_count = sum(1 for row in f)
-            #cls.row_count = 36703046
-            print("cls.row_count", cls.row_count)
-            
+        cls.sample_count = get_row_count(path_to_sample)
+        cls.df=read_csv(path_to_sample, delimiter="\t")
+
     def test_row_count(self):
-        self.assertGreaterEqual(self.row_count, 30000000)
+        row_count = get_row_count(path_to_output)
+        self.assertGreaterEqual(row_count, 30000000)
 
     def get_percent(self, column_name):
-        filled_out = 0
-        with open(path_to_output) as f:
-            counter = 0
-            for line in csv.DictReader(f, delimiter="\t"):
-                try:
-                    counter += 1
-                    if column_name in line and line[column_name] is not None:
-                        filled_out += 1
-                    if counter > threshold:
-                        break
-                except Exception as e:
-                    print("line:", line)
-                    raise e
-        percent = float(filled_out) / self.row_count
-        print(column_name + " percent: " + str(percent))
-        return percent
+        try:
+            count = self.df[column_name].count()
+            percent = float(count) / self.sample_count
+            print(column_name + " percent: " + str(percent))
+            return percent
+        except Exception as e:
+            raise e
 
 
     def test_admin1code(self):
@@ -58,16 +53,16 @@ class TestDataMethods(unittest.TestCase):
         self.assertGreaterEqual(percent, 0.001)
 
     def test_asciiname(self):
-        percent = self.get_percent("test_asciiname")
+        percent = self.get_percent("asciiname")
         self.assertGreaterEqual(percent, 0.95)
         
     def test_alternatenames(self):
-        percent = self.get_percent("alternatenames")
-        self.assertGreaterEqual(percent, 0.5)
+        percent = self.get_percent("alternate_names")
+        self.assertGreaterEqual(percent, 0.2)
         
     def test_attribution(self):
         percent = self.get_percent("attribution")
-        self.assertEqual(percent, 1)
+        self.assertGreaterEqual(percent, 0.999)
 
     def test_city(self):
         percent = self.get_percent("city")
@@ -75,11 +70,11 @@ class TestDataMethods(unittest.TestCase):
 
     def test_county(self):
         percent = self.get_percent("county")
-        self.assertGreaterEqual(percent, 0.01)
+        self.assertGreaterEqual(percent, 0.001)
 
     def test_country(self):
         percent = self.get_percent("country")
-        self.assertGreaterEqual(percent, 0.9)
+        self.assertGreaterEqual(percent, 0.01)
 
     def test_country_code(self):
         percent = self.get_percent("country_code")
@@ -91,7 +86,7 @@ class TestDataMethods(unittest.TestCase):
 
     def test_display_name(self):
         percent = self.get_percent("display_name")
-        self.assertGreaterEqual(percent, 0.9)
+        self.assertGreaterEqual(percent, 0.01)
 
     def test_elevation(self):
         percent = self.get_percent("elevation")
@@ -119,15 +114,15 @@ class TestDataMethods(unittest.TestCase):
         
     def test_latitude(self):
         percent = self.get_percent("latitude")
-        self.assertGreaterEqual(percent, 1)
+        self.assertGreaterEqual(percent, 0.999)
 
     def test_longitude(self):
         percent = self.get_percent("longitude")
-        self.assertGreaterEqual(percent, 1)
+        self.assertGreaterEqual(percent, 0.999)
 
     def test_name(self):
         percent = self.get_percent("name")
-        self.assertGreaterEqual(percent, 1)
+        self.assertGreaterEqual(percent, 0.999)
 
     def test_name_en(self):
         percent = self.get_percent("name_en")
@@ -159,7 +154,7 @@ class TestDataMethods(unittest.TestCase):
 
     def test_enwiki_title(self):
         percent = self.get_percent("enwiki_title")
-        self.assertGreaterEqual(percent, 0.90)
+        self.assertGreaterEqual(percent, 0.001)
 
 if __name__ == '__main__':
     unittest.main()
