@@ -1,6 +1,6 @@
 COPY (
     SELECT
-    admin1code
+    admin1code,
     admin2code,
     admin3code,
     admin4code,
