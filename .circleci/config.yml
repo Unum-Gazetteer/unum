@@ -25,7 +25,7 @@ jobs:
           command: apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$'
       - run:
           name: Install Other System Dependencies
-          command: apt-get install -y build-essential sudo unzip vim zip
+          command: apt-get install -y build-essential git sudo unzip vim zip
       - run:
           name: Restart PostgreSQL
           command: service postgresql restart
@@ -34,6 +34,12 @@ jobs:
           command: |
               sudo -u postgres psql -c "CREATE ROLE $(whoami) CREATEDB LOGIN SUPERUSER"
               sudo -u postgres psql -c "CREATE DATABASE unum;"
+      - run:
+          name: Download Safecast
+          command: cd /tmp && git clone https://github.com/DanielJDufour/safecast
+      - run:
+          name: Install Safecast
+          command: cd /tmp/safecast && make install
       - run:
           name: Initialize DB Extensions
           command: psql -f sql_scripts/create_extensions.sql unum;
