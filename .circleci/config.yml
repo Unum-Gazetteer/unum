@@ -109,6 +109,10 @@ jobs:
           command: python3 test.py
           no_output_timeout: 1h
       - run:
+          name: Calc Stats
+          command: python3 get_stats.py
+          no_output_timeout: 1h
+      - run:
           name: Zip
           command: cd /tmp && zip -r unum.tsv.zip unum.tsv
       - run:
