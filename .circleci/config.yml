@@ -39,7 +39,7 @@ jobs:
           command: cd /tmp && git clone https://github.com/DanielJDufour/safecast
       - run:
           name: Install Safecast
-          command: cd /tmp/safecast && make install
+          command: cd /tmp/safecast && make install && make installcheck
       - run:
           name: Initialize DB Extensions
           command: psql -f sql_scripts/create_extensions.sql unum;
