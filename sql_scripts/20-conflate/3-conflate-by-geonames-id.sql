@@ -12,7 +12,7 @@ CREATE TABLE same_geonames_id (
 INSERT INTO same_geonames_id (place_ids, geonameid, instance_count)
 SELECT array_to_string(array_agg(id), ','), geonameid, count(*)
 FROM places
-WHERE geonameid IS NOT NULL AND geonameid != ''
+WHERE geonameid IS NOT NULL AND geonameid != 0
 GROUP BY geonameid, admin_level;
 
 
