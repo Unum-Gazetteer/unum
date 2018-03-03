@@ -10,9 +10,11 @@ with open(path_to_output) as f:
     print("max_lengths:", max_lengths)
     for line in reader:
         for key, value in line.items():
-            length = len(value)
-            if length > max_lengths[key]:
-                max_lengths[key] = length
-
+            try:
+                length = len(value.encode("utf-8"))
+                if length > max_lengths[key]:
+                    max_lengths[key] = length
+            except Exception as e:
+                print(e)
 print("max_lengths:", max_lengths)
             
