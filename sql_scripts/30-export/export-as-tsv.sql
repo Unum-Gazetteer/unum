@@ -36,6 +36,7 @@ COPY (
     state,
     street,
     timezone,
+    wikidata AS wikidata_id,
     west,
     enwiki_title
     FROM places

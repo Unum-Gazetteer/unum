@@ -48,6 +48,7 @@ The unum gazetteer is licensed under ODbL (the same as OSM). More discussion of 
 | state | State, mostly from OSMNames |
 | street | Street, mostly from OSMNames |
 | timezone | Timezone, mostly from GeoNames |
+| wikidata_id | ID used by Wikidata, like Q142 |
 | west | Min Longitude |
 | enwiki_title | Title of English Wikipedia Page |
 
