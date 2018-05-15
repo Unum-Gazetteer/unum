@@ -32,7 +32,7 @@ SELECT
     name AS name,
     name AS name_en, /* name_en, Primary name in English ... need to find a better way of converting it.. but seems like osmanmes gives prominance to English */
     unaccent(name) AS name_en_unaccented, /* need to find a way to grab english name */
-    lower(unaccent(name)) as normalized_name,
+    lower(unaccent(replace(name, ".", ""))) as normalized_name,
     to_float(north) AS north,
     class as osmname_class,
     to_bigint(osm_id) AS osmname_id, /* osmname_id just use osm_id */
