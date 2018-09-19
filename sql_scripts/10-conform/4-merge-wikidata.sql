@@ -8,6 +8,7 @@ SELECT
     (SELECT most_popular(admin_level) FROM wikidata_instance_of_to_admin_level WHERE instance_of = ANY(string_to_array(classes, '; ')) LIMIT 1) as admin_level,
     get_ascii_name(primary_name) as asciiname, /* returns null if conversion didn't work, which happens with Cryllic */
     other_names as alternate_names,
+    astronomical_body,
     'Wikidata' AS attribution,
     NULL as city,
     NULL as county,

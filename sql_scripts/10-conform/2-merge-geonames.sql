@@ -8,6 +8,7 @@ SELECT
     NULL AS admin_level,
     asciiname AS asciiname, /* returns null if conversion didn't work, which happens with Cryllic */
     alternatenames AS alternate_names,
+    'Earth' AS astronomical_body,
     'GeoNames' AS attribution,
     NULL AS city,
     NULL AS county,

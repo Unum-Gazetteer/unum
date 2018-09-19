@@ -3,7 +3,8 @@ RETURNS void AS $$
 
   INSERT INTO places (
     admin1code,           admin2code,           admin3code,           admin4code,
-    admin_level,          asciiname,            alternate_names,      attribution,
+    admin_level,          asciiname,            alternate_names,      astronomical_body,
+    attribution,
     city,                 county,               country,              country_code,
     dem,                  display_name,         elevation,            east,
     geoname_feature_class,geoname_feature_code, geonameid,            geo_tag_id,
@@ -19,7 +20,7 @@ RETURNS void AS $$
   )
 
   SELECT
-  
+
     NULL, /* admin1code */
     NULL, /* admin2code */
     NULL, /* admin3code */
@@ -27,6 +28,7 @@ RETURNS void AS $$
     NULL, /* admin_level */
     longest(asciiname), /* asciiname */
     uniq(alternate_names), /* alternate_names */
+    longest(astronomical_body)::varchar(994), /* astronomical_body */
     uniq(attribution)::varchar(998), /* attribution */
     longest(city)::varchar(997), /* city */
     longest(county)::varchar(996), /* county */

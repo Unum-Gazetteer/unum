@@ -13,7 +13,8 @@ CREATE TABLE wikidata (
     latitude float,
     longitude float,
     population varchar(100),
-    osm_id varchar(100)
+    osm_id varchar(100),
+    astronomical_body varchar(1000)
 );
 
 COPY wikidata FROM '/tmp/gazetteers/wikidata-gazetteer.tsv' WITH (FORMAT 'csv', DELIMITER E'\t', HEADER);

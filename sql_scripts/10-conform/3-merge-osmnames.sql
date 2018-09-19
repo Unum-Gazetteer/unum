@@ -8,6 +8,7 @@ SELECT
     get_admin_level(type, to_integer(place_rank)) AS admin_level,
     get_ascii_name(name) as asciiname, /* returns null if conversion didn't work, which happens with Cryllic */
     alternative_names as alternate_names,
+    'Earth' as astronomical_body,
     '(Copyright) OpenStreetMap contributors' AS attribution,
     city,
     county,

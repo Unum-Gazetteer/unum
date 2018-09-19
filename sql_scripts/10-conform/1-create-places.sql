@@ -8,6 +8,7 @@ CREATE TABLE places (
     admin_level smallint,
     asciiname varchar(2000),
     alternate_names varchar(100000),
+    astronomical_body varchar(1000),
     attribution varchar(1000),
     city varchar(1000),
     county varchar(1000),
@@ -53,5 +54,5 @@ CREATE TABLE places (
     wikipageid bigint,
     wikititle varchar(10000),
     wikiurl varchar(10000),
-    enwiki_title varchar(5023)    
+    enwiki_title varchar(5023)
 );

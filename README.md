@@ -19,6 +19,7 @@ The unum gazetteer is licensed under ODbL (the same as OSM). More discussion of 
 | admin_level | Admin Level |
 | asciiname | Name converted into ascii encoding |
 | alternate_names | Other names for this place |
+| astronomical_body | name of planet, moon, or other body | Mars |
 | attribution | Attribution to Geonames, OSM Contributors, and/or Wikidata |
 | city | Name of City |
 | county | Name of County |
@@ -53,7 +54,7 @@ The unum gazetteer is licensed under ODbL (the same as OSM). More discussion of 
 | enwiki_title | Title of English Wikipedia Page |
 
 ## Attribution
-This gazetteer would not be possible without OpenStreetMap contributors, GeoNames, and Wikidata.  My heartfelt thanks to all.  Attribution is also provided for each place in 'attribution' column of the .tsv file. 
+This gazetteer would not be possible without OpenStreetMap contributors, GeoNames, and Wikidata.  My heartfelt thanks to all.  Attribution is also provided for each place in 'attribution' column of the .tsv file.
 
 ## Data License
 

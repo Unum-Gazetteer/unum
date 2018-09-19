@@ -7,6 +7,7 @@ COPY (
     admin_level,
     asciiname,
     alternate_names,
+    astronomical_body,
     attribution,
     city,
     county,
