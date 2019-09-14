@@ -71,3 +71,6 @@ Although [Wikipedia](https://wikipedia.org) content appears to be available unde
 
 ### Disclaimer
 To the best of my ability, I have written this code and distributed this data in accordance with all licenses. If anyone has any questions or believe I have misinterpreted the licenses, please don't hesitate to contact me at daniel@firstdraftgis.com and I will address your concerns promptly.
+
+# Contact
+Feel free to post an issue or email Daniel J. Dufour at daniel.j.dufour@gmail.com
