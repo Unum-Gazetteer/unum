@@ -1,4 +1,5 @@
-### Beta Version
+![Unum Gazetteer](https://avatars3.githubusercontent.com/u/55306625?s=200&v=4)
+
 
 # unum gazetteer
 gazetteer that combines OSMNames, GeoNames and Wikidata.
