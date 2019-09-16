@@ -34,10 +34,7 @@ echo "Install Safecast"
 cd /tmp/safecast && make install
 
 echo "Initialize DB Extensions"
-psql -f sql_scripts/create_extensions.sql unum;
-
-echo "return to unum source code directory"
-cd $UNUM_SRC_DIR
+psql -f ${UNUM_SRC_DIR}/sql_scripts/create_extensions.sql unum;
 
 echo "Create PSQL Utils"
 for file in ${UNUM_SRC_DIR}/sql_scripts/1-utils/*; do
