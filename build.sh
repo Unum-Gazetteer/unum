@@ -53,14 +53,14 @@ fi;
 echo "Download OSMNames"
 if [ ! -f "/tmp/gazetteers/planet-latest_geonames.tsv" ] ; then
   cd /tmp/gazetteers;
-  wget https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz;
+  wget --quiet https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz;
   gunzip planet-latest_geonames.tsv.gz;
 fi;
 
 echo "Download GeoNames"
 if [ ! -f "/tmp/gazetteers/allCountries.txt" ] ; then
   cd /tmp/gazetteers;
-  wget http://download.geonames.org/export/dump/allCountries.zip;
+  wget --quiet http://download.geonames.org/export/dump/allCountries.zip;
   unzip allCountries.zip;
 fi;
 
