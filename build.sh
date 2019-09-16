@@ -14,7 +14,7 @@ echo "search for PostGIS packages"
 apt-cache search postgis
 
 echo "Install Database Dependencies"
-sudo apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$'
+sudo apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9](.[0-9])*-postgis-[0-9](.[0-9])*$'
 
 echo "Restart PostgreSQL"
 sudo service postgresql restart
