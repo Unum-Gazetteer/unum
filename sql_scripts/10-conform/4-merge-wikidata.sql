@@ -1,13 +1,13 @@
 INSERT INTO places
-(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, place_type, point, point_4, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl, enwiki_title)
+(admin1code, admin2code, admin3code, admin4code, admin_level, alternate_names, asciiname, astronomical_body, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, place_type, point, point_4, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl, enwiki_title)
 SELECT
     NULL AS admin1code,
     NULL AS admin2code,
     NULL AS admin3code,
     NULL AS admin4code,
     (SELECT most_popular(admin_level) FROM wikidata_instance_of_to_admin_level WHERE instance_of = ANY(string_to_array(classes, '; ')) LIMIT 1) as admin_level,
-    get_ascii_name(primary_name) as asciiname, /* returns null if conversion didn't work, which happens with Cryllic */
     other_names as alternate_names,
+    get_ascii_name(primary_name) as asciiname, /* returns null if conversion didn't work, which happens with Cryllic */
     astronomical_body,
     'Wikidata' AS attribution,
     NULL as city,
