@@ -38,11 +38,13 @@ psql -f ${UNUM_SRC_DIR}/sql_scripts/create_extensions.sql unum;
 
 echo "Create PSQL Utils"
 for file in ${UNUM_SRC_DIR}/sql_scripts/1-utils/*; do
+  echo "RUNNING $file";
   psql -f $file unum;
 done
 
 echo "Create Custom Number Conversion Functions"
 for file in ${UNUM_SRC_DIR}/sql_scripts/2-convert/*; do
+  echo "RUNNING $file";
   psql -f $file unum;
 done
 
@@ -77,21 +79,25 @@ cp ${UNUM_SRC_DIR}/data/* /tmp/.
 
 echo "Load Gazetteers"
 for file in ${UNUM_SRC_DIR}/sql_scripts/5-load/*; do
+  echo "RUNNING $file";
   psql -f $file unum;
 done
 
 echo "Re-format Data from Gazetteers into Standard Format"
 for file in ${UNUM_SRC_DIR}/sql_scripts/10-conform/*; do
+  echo "RUNNING $file";
   psql -f $file unum;
 done
 
 echo "Conflate"
 for file in ${UNUM_SRC_DIR}/sql_scripts/20-conflate/*; do
+  echo "RUNNING $file";
   psql -f $file unum;
 done
 
 echo "Export"
 for file in ${UNUM_SRC_DIR}/sql_scripts/30-export/*; do
+  echo "RUNNING $file";
   psql -f $file unum;
 done
 
