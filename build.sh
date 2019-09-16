@@ -1,5 +1,10 @@
+#!/bin/sh
+
+echo "Installing sudo"
+apt-get install sudo
+
 echo "Install Other System Dependencies"
-apt-get install -y build-essential git sudo unzip vim zip
+sudo apt-get install -y build-essential git sudo unzip vim zip
 
 echo "Update Package Lists"
 sudo apt-get update -qq
