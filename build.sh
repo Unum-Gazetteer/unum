@@ -1,11 +1,11 @@
+echo "Install Other System Dependencies"
+apt-get install -y build-essential git sudo unzip vim zip
+
 echo "Update Package Lists"
 sudo apt-get update -qq
 
 echo "Install Database Dependencies"
 sudo apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$'
-
-echo "Install Other System Dependencies"
-sudo apt-get install -y build-essential git sudo unzip vim zip
 
 echo "Restart PostgreSQL"
 sudo service postgresql restart
