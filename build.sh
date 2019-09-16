@@ -1,8 +1,9 @@
 # exit on the first error found
 set -o errexit
 
-echo "Print Working Directory"
-UNUM_SRC_DIR=$PWD
+echo "Set Source Code Directory"
+UNUM_SRC_DIR=$(pwd)
+echo "Set Source Code Directory to $UNUM_SRC_DIR"
 
 echo "Installing sudo"
 apt-get install sudo
