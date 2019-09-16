@@ -46,7 +46,7 @@ fi;
 echo "Download Gazetteer from Wikidata"
 if [ ! -f "/tmp/gazetteers/wikidata-gazetteer.tsv" ] ; then
   cd /tmp/gazetteers;
-  wget https://s3.amazonaws.com/firstdraftgis/wikidata-gazetteer.tsv.zip;
+  wget --quiet https://s3.amazonaws.com/firstdraftgis/wikidata-gazetteer.tsv.zip;
   unzip wikidata-gazetteer.tsv.zip;
 fi;
 
