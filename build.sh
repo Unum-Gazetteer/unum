@@ -1,4 +1,5 @@
-#!/bin/sh
+# exit on the first error found
+set -o errexit
 
 echo "Installing sudo"
 apt-get install sudo
@@ -8,6 +9,9 @@ sudo apt-get install -y build-essential git sudo unzip vim zip
 
 echo "Update Package Lists"
 sudo apt-get update -qq
+
+echo "search for PostGIS packages"
+apt-cache search postgis
 
 echo "Install Database Dependencies"
 sudo apt-get install -y postgresql postgresql-contrib postgresql-server-dev-all '^postgresql-[0-9].[0-9]-postgis-[0-9].[0-9]$'
