@@ -2,7 +2,7 @@
 set -o errexit
 
 echo "Print Working Directory"
-pwd
+UNUM_SRC_DIR=$PWD
 
 echo "Installing sudo"
 apt-get install sudo
@@ -35,13 +35,16 @@ cd /tmp/safecast && make install
 echo "Initialize DB Extensions"
 psql -f sql_scripts/create_extensions.sql unum;
 
+echo "return to unum source code directory"
+cd $UNUM_SRC_DIR
+
 echo "Create PSQL Utils"
-for file in sql_scripts/1-utils/*; do
+for file in ${UNUM_SRC_DIR}/sql_scripts/1-utils/*; do
   psql -f $file unum;
 done
 
 echo "Create Custom Number Conversion Functions"
-for file in sql_scripts/2-convert/*; do
+for file in ${UNUM_SRC_DIR}/sql_scripts/2-convert/*; do
   psql -f $file unum;
 done
 
@@ -72,28 +75,25 @@ if [ ! -f "/tmp/gazetteers/allCountries.txt" ] ; then
 fi;
 
 echo "Copy Over Temp Files"
-cp data/* /tmp/.
-
-echo "Return to Source Code Directory"
-cd $CODEBUILD_SRC_DIR
+cp ${UNUM_SRC_DIR}/data/* /tmp/.
 
 echo "Load Gazetteers"
-for file in sql_scripts/5-load/*; do
+for file in ${UNUM_SRC_DIR}/sql_scripts/5-load/*; do
   psql -f $file unum;
 done
 
 echo "Re-format Data from Gazetteers into Standard Format"
-for file in sql_scripts/10-conform/*; do
+for file in ${UNUM_SRC_DIR}/sql_scripts/10-conform/*; do
   psql -f $file unum;
 done
 
 echo "Conflate"
-for file in sql_scripts/20-conflate/*; do
+for file in ${UNUM_SRC_DIR}/sql_scripts/20-conflate/*; do
   psql -f $file unum;
 done
 
 echo "Export"
-for file in sql_scripts/30-export/*; do
+for file in ${UNUM_SRC_DIR}/sql_scripts/30-export/*; do
   psql -f $file unum;
 done
 
@@ -104,7 +104,7 @@ echo "Install Pandas"
 pip install pandas --upgrade
 
 echo "Test"
-python3 test.py
+cd $UNUM_SRC_DIR && python3 test.py
 
 echo "Zip"
 cd /tmp && zip -r unum.tsv.zip unum.tsv
