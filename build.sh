@@ -1,6 +1,9 @@
 # exit on the first error found
 set -o errexit
 
+echo "Print Working Directory"
+pwd
+
 echo "Installing sudo"
 apt-get install sudo
 
@@ -24,7 +27,7 @@ sudo -u postgres psql -c "CREATE ROLE $(whoami) CREATEDB LOGIN SUPERUSER"
 sudo -u postgres psql -c "CREATE DATABASE unum;"
 
 echo "Download Safecast"
-cd /tmp && git clone https://github.com/DanielJDufour/safecast
+git clone https://github.com/DanielJDufour/safecast /tmp/safecast
 
 echo "Install Safecast"
 cd /tmp/safecast && make install
@@ -70,6 +73,9 @@ fi;
 
 echo "Copy Over Temp Files"
 cp data/* /tmp/.
+
+echo "Return to Source Code Directory"
+cd $CODEBUILD_SRC_DIR
 
 echo "Load Gazetteers"
 for file in sql_scripts/5-load/*; do
