@@ -6,4 +6,4 @@ phases:
       python: 3.7
   build:
     commands:
-       - git clone https://github.com/Unum-Gazetteer/unum && cd unum && bash build.sh
+       - bash build.sh
