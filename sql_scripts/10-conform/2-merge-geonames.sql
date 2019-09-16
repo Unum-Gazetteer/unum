@@ -1,20 +1,20 @@
 INSERT INTO places
-(admin1code, admin2code, admin3code, admin4code, admin_level, asciiname, alternate_names, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, place_type, point, point_4, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl, enwiki_title)
+(admin1code, admin2code, admin3code, admin4code, admin_level, alternate_names, asciiname, astronomical_body, attribution, city, county, country, country_code, dem, display_name, elevation, east, geoname_feature_class, geoname_feature_code, geonameid, geo_tag_id, grid_cell_1_degree, grid_cell_5_degrees, grid_cell_10_degrees, has_admin_level, has_population, importance, latitude, longitude, name, name_en, name_en_unaccented, normalized_name, north, osmname_class, osmname_id, osmname_type, osm_id, place_rank, place_type, point, point_4, population, south, state, street, timezone, west, wikidata, wikipageid, wikititle, wikiurl, enwiki_title)
 SELECT
     admin1_code AS admin1code,
     admin2_code AS admin2code,
     admin3_code AS admin3code,
     admin4_code AS admin4code,
     NULL AS admin_level,
-    asciiname AS asciiname, /* returns null if conversion didn't work, which happens with Cryllic */
     alternatenames AS alternate_names,
+    asciiname AS asciiname, /* returns null if conversion didn't work, which happens with Cryllic */
     'Earth' AS astronomical_body,
     'GeoNames' AS attribution,
     NULL AS city,
     NULL AS county,
     NULL AS country,
     country_code,
-    dem, /* dem */
+    dem,
     NULL AS display_name,
     elevation,
     NULL AS east,
