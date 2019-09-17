@@ -58,6 +58,7 @@ if [ ! -f "/tmp/gazetteers/wikidata-gazetteer.tsv" ] ; then
   cd /tmp/gazetteers;
   wget --quiet https://s3.amazonaws.com/firstdraftgis/wikidata-gazetteer.tsv.zip;
   unzip wikidata-gazetteer.tsv.zip;
+  rm wikidata-gazetteer.tsv.zip; 
 fi;
 
 echo "Download OSMNames"
@@ -65,6 +66,7 @@ if [ ! -f "/tmp/gazetteers/planet-latest_geonames.tsv" ] ; then
   cd /tmp/gazetteers;
   wget --quiet https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz;
   gunzip planet-latest_geonames.tsv.gz;
+  rm planet-latest_geonames.tsv.gz;
 fi;
 
 echo "Download GeoNames"
@@ -72,6 +74,7 @@ if [ ! -f "/tmp/gazetteers/allCountries.txt" ] ; then
   cd /tmp/gazetteers;
   wget --quiet http://download.geonames.org/export/dump/allCountries.zip;
   unzip allCountries.zip;
+  rm allCountries.zip;
 fi;
 
 echo "Copy Over Temp Files"
