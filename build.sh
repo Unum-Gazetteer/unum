@@ -53,7 +53,7 @@ if [ ! -d "/tmp/gazetteers" ] ; then
   mkdir /tmp/gazetteers;
 fi;
 
-echo "Download Gazetteer from Wikidata"
+echo "Download Wikidata Gazetteer"
 if [ ! -f "/tmp/gazetteers/wikidata-gazetteer.tsv" ] ; then
   cd /tmp/gazetteers;
   wget --quiet https://s3.amazonaws.com/firstdraftgis/wikidata-gazetteer.tsv.zip;
@@ -66,7 +66,6 @@ if [ ! -f "/tmp/gazetteers/planet-latest_geonames.tsv" ] ; then
   cd /tmp/gazetteers;
   wget --quiet https://github.com/OSMNames/OSMNames/releases/download/v2.0.3/planet-latest_geonames.tsv.gz;
   gunzip planet-latest_geonames.tsv.gz;
-  rm planet-latest_geonames.tsv.gz;
 fi;
 
 echo "Download GeoNames"
